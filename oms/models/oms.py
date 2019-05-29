@@ -11,7 +11,7 @@ from odoo.tools.float_utils import float_round as round
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from odoo.exceptions import UserError, ValidationError
 from odoo import api, fields, models, _
-from odoo.osv import osv
+import odoo.addons.convl as convl
 
 
 
@@ -39,7 +39,7 @@ class SaleOrder(models.Model):
 
     @api.depends('amount_totalo')
     def compute_amount_text(self):
-        return convlettres(self.amount_totals)
+        return convl.convlettres(self.amount_totals)
     @api.depends('order_line.price_subtotalo')
     def _calcule_montantht(self):
         for order in self:
