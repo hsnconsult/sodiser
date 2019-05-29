@@ -194,7 +194,7 @@ class AccountInvoice(models.Model):
 
     @api.depends('amount_avoir')
     def compute_amount_avoir_text(self):
-        return convlettres(self.amount_avoir)
+        return convl.convlettres(self.amount_avoir)
     
     @api.depends('invoice_line_ids.price_subtotalo')
     def _calcule_montantht(self):
