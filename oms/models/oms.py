@@ -179,7 +179,7 @@ class AccountPayment(models.Model):
 
     @api.depends('amount')
     def compute_text(self):
-        return convlettres(self.amount)
+        return convl.convlettres(self.amount)
 
     objet = fields.Char('Objet', size=64, select=True)
 
@@ -190,7 +190,7 @@ class AccountInvoice(models.Model):
 
     @api.depends('amount_total')
     def compute_amount_text(self):
-        return convlettres(self.amount_total)
+        return convl.convlettres(self.amount_total)
 
     @api.depends('amount_avoir')
     def compute_amount_avoir_text(self):
