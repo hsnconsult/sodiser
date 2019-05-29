@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="minimal_layout_inherit" inherit_id="report.minimal_layout">
+		<xpath expr="//head" position="inside">
+			<link rel='stylesheet' href="/venteprev/static/src/css/venteprev.css"/>
+		</xpath>
+</template>
+
+<template id="report_nonsorti">
+    <t t-call="report.html_container">
+        <t t-set="data_report_margin_top" t-value="12"/>
+        <t t-set="data_report_header_spacing" t-value="9"/>
+        <t t-set="data_report_dpi" t-value="110"/>
+        <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <img t-att-src="'/venteprev/static/src/img/logo.png'" />
+                    <p><div align="left" class="print">Imprimé le <span t-esc="data['date_cour']" t-esc-options='{"widget": "date"}' /></div></p>
+                     <p> </p><p> </p>
+                    <p><div align="center" class="titre">Etat des bons non sortis du <span t-esc="data['debut']" t-esc-options='{"widget": "date"}'/> au <span t-esc="data['fin']" t-esc-options='{"widget": "date"}'/> </div></p>
+                     <p> </p><p> </p>
+						<table class="table table-bordered">
+                          <thead class="titrecol">
+  							<tr>
+							    <td>Numéro</td>
+							    <td>Date</td>
+							    <td>Client</td>
+							    <td>Produit</td>
+							    <td>Quantité</td>
+							    <td>Montant</td>
+							</tr>
+                          </thead>
+                         <tbody class="poste">
+                          <t t-foreach="nslines" t-as="nsline">
+                            <tr>
+                                <td><span t-esc="nsline['numbon']"/></td>
+                                <td><span t-esc="nsline['datebon']"/></td>
+                                <td><span t-esc="nsline['client']"/></td>
+                                <td><span t-esc="nsline['produit']"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(nsline['quantite']).replace(',', ' ').replace('.', ',')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(nsline['montant']).replace(',', ' ').replace('.', ',')"/></td>
+							</tr>
+                          </t>
+                         </tbody>
+						</table>
+
+                </div>
+        </t>
+    </t>
+</template>
+</odoo>

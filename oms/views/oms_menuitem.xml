@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Top menu -->
+	<menuitem id="oms_vente" name="SONABHY-DOUANE" sequence="10"/>
+    <menuitem id="menu_oms_vente" name="SONABHY-DOUANE" parent = "oms_vente" sequence="10"/>
+    <menuitem id="menu_oms_vente_facture" name="Factures" parent = "menu_oms_vente" sequence="10" action="action_oms_facture"/>
+    <menuitem id="menu_oms_vente_reglement" name="Règlements" parent = "menu_oms_vente" sequence="13" action="action_oms_reglement"/>
+    <menuitem id="menu_oms_vente_douane" name="Douane" parent = "menu_oms_vente" sequence="15" action="action_oms_douane"/>
+    <menuitem id="menu_oms_param" name="Paramètres" parent = "oms_vente" sequence="20"/>
+    <menuitem id="menu_oms_param_decade" name="Decades" parent = "menu_oms_param" sequence="20" action="action_oms_decade"/>
+
+	<!-- Menu  Etats -->   
+	<menuitem id="oms_etats" name="Etats" sequence="20"/>
+    <menuitem id="menu_oms_etat" name="Etats" parent = "oms_etats" sequence="10"/>
+    <menuitem id="menu_oms_etat_sortiedouanetot" name="Etat Sorties-Douane" parent = "menu_oms_etat" sequence="3" action="action_oms_sortiedouanetot_report"/>
+    <menuitem id="menu_oms_etat_sortiedouanemois" name="Etat par mois" parent = "menu_oms_etat" sequence="4" action="action_oms_sortiedouanemois_report"/>
+    <menuitem id="menu_oms_etat_sortiedouane" name="Etat Sorties-Douane par produit" parent = "menu_oms_etat" sequence="5" action="action_oms_sortiedouane_report"/>
+    <menuitem id="menu_oms_etat_venteclient" name="Ventes par client" parent = "menu_oms_etat" sequence="10" action="action_oms_venteclient_report"/>
+    <menuitem id="menu_oms_etat_venteproduit" name="Ventes par produit" parent = "menu_oms_etat" sequence="15" action="action_oms_venteproduit_report"/>
+    <menuitem id="menu_oms_etat_nonsorti" name="Bons non sortis" parent = "menu_oms_etat" sequence="20" action="action_oms_nonsorti_report"/>
+    <menuitem id="menu_oms_etat_sorti" name="Bons sortis" parent = "menu_oms_etat" sequence="25" action="action_oms_sorti_report"/>
+    <menuitem id="menu_oms_etat_decade" name="Décades saisies" parent = "menu_oms_etat" sequence="30" action="action_oms_decade_report"/>-->  
+
+        <menuitem name="Suivi des ventes"
+            id="menu_omsstat"
+            sequence="100"/>
+        <menuitem id="menu_oms_analyse" name="Analyses" parent="menu_omsstat" sequence="10"/>
+        <menuitem id="menu_oms_analyse_vente" action="action_oms_vuvente" name="Analyse des ventes" parent="menu_oms_analyse" sequence="10"/>
+        <menuitem id="menu_oms_analyse_solde" action="action_oms_vuclient" name="Analyse des soldes" parent="menu_oms_analyse" sequence="15"/>
+ 
+   </data>
+</odoo>
+

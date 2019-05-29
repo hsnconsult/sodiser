@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- QWeb Reports -->
+        <report 
+            id="report_belle"
+            model="sale.order"
+            string="Bon d'enlèvement"
+            report_type="qweb-pdf"
+            name="oms.report_bel"
+            file="oms.report_bel"
+            />
+        <report 
+            id="report_blivr"
+            model="sale.order"
+            string="Bon de livraison"
+            report_type="qweb-pdf"
+            name="oms.report_bliv"
+            file="oms.report_bliv"
+            />
+        <report 
+            id="report_fact"
+            model="account.invoice"
+            string="Facture client"
+            report_type="qweb-pdf"
+            name="oms.report_facture"
+            file="oms.report_facture"
+            />
+        <report 
+            id="report_avo"
+            model="account.invoice"
+            string="Avoir client"
+            report_type="qweb-pdf"
+            name="oms.report_avoir"
+            file="oms.report_avoir"
+            />
+        <report 
+            id="action_report_sortiedouane"
+            model="oms.commande"
+            string="Sorties Douane"
+            report_type="qweb-html"
+            name="oms.report_sortiedouane"
+            file="oms.report_sortiedouane"
+            />
+        <report 
+            id="action_report_sortiedouanetot"
+            model="oms.douane"
+            string="Sorties Douane tot"
+            report_type="qweb-html"
+            name="oms.report_sortiedouanetot"
+            file="oms.report_sortiedouanetot"
+            />
+        <report 
+            id="action_report_venteclient"
+            model="oms.commande"
+            string="Vente client"
+            report_type="qweb-html"
+            name="oms.report_venteclient"
+            file="oms.report_venteclient"
+            />
+        <report 
+            id="action_report_venteproduit"
+            model="oms.commande"
+            string="Vente produit"
+            report_type="qweb-html"
+            name="oms.report_venteproduit"
+            file="oms.report_venteproduit"
+            />
+        <report 
+            id="action_report_nonsorti"
+            model="oms.commande"
+            string="non sorti"
+            report_type="qweb-html"
+            name="oms.report_nonsorti"
+            file="oms.report_nonsorti"
+            />
+        <report 
+            id="action_report_sorti"
+            model="oms.commande"
+            string="sorti"
+            report_type="qweb-html"
+            name="oms.report_sorti"
+            file="oms.report_sorti"
+            />
+        <report 
+            id="action_report_sortiedouanemois"
+            model="oms.commande"
+            string="Sorties Douane mois"
+            report_type="qweb-html"
+            name="oms.report_sortiedouanemois"
+            file="oms.report_sortiedouanemois"
+            />
+        <report 
+            id="action_report_decade"
+            model="oms.commande"
+            string="Decades"
+            report_type="qweb-html"
+            name="oms.report_decade"
+            file="oms.report_decade"
+            />
+        <report 
+            id="report_payment"
+            model="account.payment"
+            string="Recu de caisse"
+            report_type="qweb-pdf"
+            name="oms.report_paye"
+            file="oms.report_paye"
+            />
+    </data>
+</odoo>

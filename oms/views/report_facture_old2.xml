@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="minimal_layout_inherit" inherit_id="report.minimal_layout">
+		<xpath expr="//head" position="inside">
+			<link rel='stylesheet' href="/oms/static/src/css/oms.css"/>
+		</xpath>
+</template>
+<template id="report_facture">
+    <t t-call="report.html_container">
+        <t t-set="data_report_margin_top" t-value="12"/>
+        <t t-set="data_report_header_spacing" t-value="9"/>
+        <t t-set="data_report_dpi" t-value="110"/>
+        <t t-foreach="docs" t-as="o">
+                <div class="page">
+
+
+                    <p><div align="left" class="titre">FACTURE</div></p>
+
+ 
+                     <p> </p><p> </p>
+                    <p><div align="left" class="titre">Doit: </div></p>
+                      <div class="entete" style="width:50%;">
+						<table class="table table-borderedp postefact">
+  							<tr><td width="30%">Nom:</td><td><span t-esc="o.partner_id.name" /></td></tr>
+  							<tr><td>Adresse:</td><td><span t-esc="o.partner_id.street" /></td></tr>
+  							<tr><td>Téléphone:</td><td><span t-esc="o.partner_id.phone" /></td></tr>
+						</table>
+                      </div>
+                      <div class="entete" style="width:40%; float:right">
+						<table class="table table-borderedp postefact">
+  							<tr><td width="50%">NUMERO</td><td><span t-esc="o.number" /></td></tr>
+  							<tr><td>DATE</td><td><span t-esc="o.date_invoice" t-esc-options='{"widget": "date"}'/></td></tr>
+                            <tr><td>REFERENCE</td><td></td></tr>
+						</table>
+                      </div>
+                      <div id="tableau">
+						<table class="table table-borderedp">
+                          <thead class="titrecol">
+  							<tr>
+							    <td>Désignation</td>
+							    <td>Quantité</td>
+							    <td>Px unitaire</td>
+							    <td>PVMA</td>
+							    <td>Montant HT</td>
+							</tr>
+                          </thead>
+                         <tbody class="postefact">
+                          <t t-foreach="o.invoice_line_ids" t-as="oline">
+                           <tr>
+                            <td><span t-esc="oline.product_id.name"/></td>
+                            <td align="right"><span t-esc="'{:,.0f}'.format(oline.quantity).replace(',', ' ').replace('.', ',')"/></td>
+							<td align="right"><span t-esc="'{:,.0f}'.format(oline.price_unit).replace(',', ' ').replace('.', ',')"/></td>
+							<td align="right"><span t-esc="'{:,.0f}'.format(oline.get_pvmax()).replace(',', ' ').replace('.', ',')"/></td>
+							<td align="right"><span t-esc="'{:,.0f}'.format(oline.price_subtotal).replace(',', ' ').replace('.', ',')"/></td>
+                           </tr>
+                          </t>
+                         </tbody>
+						</table>
+                      </div>
+                      <div id="pied" style="width:40%; float:left">
+						<table class="table table-borderedp postefact">
+  							<tr><td>Code</td><td>Base</td><td>Taux</td><td>Montant</td></tr>
+  							<tr><td></td><td><span t-esc="'{:,.0f}'.format(o.amount_untaxed).replace(',', ' ').replace('.', ',')"/></td><td>0,20%</td><td><span t-esc="'{:,.0f}'.format(o.amount_tax).replace(',', ' ').replace('.', ',')"/></td></tr>
+  							<tr><td colspan="3">Total</td><td><span t-esc="'{:,.0f}'.format(o.amount_untaxed).replace(',', ' ').replace('.', ',')"/></td></tr>
+						</table>
+                      </div>
+                      <div id="pied" style="width:58%; float:right">
+						<table class="table table-borderedp postefact">
+  							<tr><td>Total HT</td><td>Avoir</td><td>Total TTC</td><td>Acompte</td><td>NET A PAYER</td></tr>
+  							<tr><td><span t-esc="'{:,.0f}'.format(o.amount_untaxed).replace(',', ' ').replace('.', ',')"/></td><td></td><td><span t-esc="'{:,.0f}'.format(o.amount_total).replace(',', ' ').replace('.', ',')"/></td><td></td><td><span t-esc="'{:,.0f}'.format(o.amount_total).replace(',', ' ').replace('.', ',')"/></td></tr>
+						</table>
+                      </div>
+                     <p><div id="enlettre" class="poste">Arretée la facture à :<br/> <span t-esc="o.compute_amount_text()" style="color:#800000"/><span style="color:#800000">  (<span t-esc="'{:,.0f}'.format(o.amount_total).replace(',', ' ').replace('.', ',')"/>) Francs CFA</span><br/></div> </p>
+					 <br/><br/><br/>
+                      <div id="signature2">
+						Pour SODIS OIL<br/><br/><br/><br/><br/>
+                        Le Directeur Général
+                      </div>
+      </div>
+        </t>
+    </t>
+</template>
+</odoo>

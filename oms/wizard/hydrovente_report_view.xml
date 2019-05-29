@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="oms_sortiedouane_report_view" model="ir.ui.view">
+        <field name="name">Sortie Douane</field>
+        <field name="model">oms.sortiedouane.report</field>
+        <field name="arch" type="xml">
+        <form string="Sorties  Douane">
+            <group col="4">
+                <field name="decade"/>
+                <field name="produit"/>
+                <field name="date_cour" invisible="1"/>
+            </group>
+            <footer>
+                <button name="check_report" string="Imprimer" type="object" default_focus="1" class="oe_highlight"/>
+                or 
+                <button string="Annuler" class="oe_link" special="cancel" />
+            </footer>
+        </form>
+        </field>
+    </record>
+
+    <record id="action_oms_sortiedouane_report" model="ir.actions.act_window">
+        <field name="name">Sortie Douane</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">oms.sortiedouane.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="oms_sortiedouane_report_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_oms_sortiedouane_values" model="ir.values">
+        <field name="model_id" ref="oms.model_oms_commande" />
+        <field name="name">Sortie Douane</field>
+        <field name="key2">client_print_multi</field>
+        <field name="value" eval="'ir.actions.act_window,' +str(ref('action_oms_sortiedouane_report'))" />
+        <field name="key">action</field>
+        <field name="model">oms.sortiedouane.report</field>
+    </record>
+
+    <record id="oms_sortiedouanetot_report_view" model="ir.ui.view">
+        <field name="name">Sortie Douane</field>
+        <field name="model">oms.sortiedouanetot.report</field>
+        <field name="arch" type="xml">
+        <form string="Sorties  Douane par decade">
+            <group col="4">
+                <field name="decade"/>
+                <field name="date_cour" invisible="1"/>
+            </group>
+            <footer>
+                <button name="check_report" string="Imprimer" type="object" default_focus="1" class="oe_highlight"/>
+                or 
+                <button string="Annuler" class="oe_link" special="cancel" />
+            </footer>
+        </form>
+        </field>
+    </record>
+
+    <record id="action_oms_sortiedouanetot_report" model="ir.actions.act_window">
+        <field name="name">Sortie Douane</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">oms.sortiedouanetot.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="oms_sortiedouanetot_report_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_oms_sortiedouanetot_values" model="ir.values">
+        <field name="model_id" ref="oms.model_oms_commande" />
+        <field name="name">Sortie Douane</field>
+        <field name="key2">client_print_multi</field>
+        <field name="value" eval="'ir.actions.act_window,' +str(ref('action_oms_sortiedouanetot_report'))" />
+        <field name="key">action</field>
+        <field name="model">oms.sortiedouanetot.report</field>
+    </record>
+
+    <record id="oms_venteclient_report_view" model="ir.ui.view">
+        <field name="name">Vente Client</field>
+        <field name="model">oms.venteclient.report</field>
+        <field name="arch" type="xml">
+        <form string="Vente Client">
+            <group col="4">
+                <field name="debut"/>
+                <field name="fin"/>
+                <field name="date_cour" invisible="1"/>
+            </group>
+            <footer>
+                <button name="check_report" string="Imprimer" type="object" default_focus="1" class="oe_highlight"/>
+                or 
+                <button string="Annuler" class="oe_link" special="cancel" />
+            </footer>
+        </form>
+        </field>
+    </record>
+
+    <record id="action_oms_venteclient_report" model="ir.actions.act_window">
+        <field name="name">Vente Client</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">oms.venteclient.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="oms_venteclient_report_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_oms_venteclient_values" model="ir.values">
+        <field name="model_id" ref="oms.model_oms_commande" />
+        <field name="name">Vente Produit</field>
+        <field name="key2">client_print_multi</field>
+        <field name="value" eval="'ir.actions.act_window,' +str(ref('action_oms_venteclient_report'))" />
+        <field name="key">action</field>
+        <field name="model">oms.venteclient.report</field>
+    </record>
+
+    <record id="oms_venteproduit_report_view" model="ir.ui.view">
+        <field name="name">Vente Produit</field>
+        <field name="model">oms.venteproduit.report</field>
+        <field name="arch" type="xml">
+        <form string="Vente Produit">
+            <group col="4">
+                <field name="debut"/>
+                <field name="fin"/>
+                <field name="date_cour" invisible="1"/>
+            </group>
+            <footer>
+                <button name="check_report" string="Imprimer" type="object" default_focus="1" class="oe_highlight"/>
+                or 
+                <button string="Annuler" class="oe_link" special="cancel" />
+            </footer>
+        </form>
+        </field>
+    </record>
+
+    <record id="action_oms_venteproduit_report" model="ir.actions.act_window">
+        <field name="name">Vente Produit</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">oms.venteproduit.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="oms_venteproduit_report_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_oms_venteproduit_values" model="ir.values">
+        <field name="model_id" ref="oms.model_oms_commande" />
+        <field name="name">Vente Produit</field>
+        <field name="key2">client_print_multi</field>
+        <field name="value" eval="'ir.actions.act_window,' +str(ref('action_oms_venteproduit_report'))" />
+        <field name="key">action</field>
+        <field name="model">oms.venteproduit.report</field>
+    </record>
+
+    <record id="oms_nonsorti_report_view" model="ir.ui.view">
+        <field name="name">Bons non sortis</field>
+        <field name="model">oms.nonsorti.report</field>
+        <field name="arch" type="xml">
+        <form string="Bons non sortis">
+            <group col="4">
+                <field name="debut"/>
+                <field name="fin"/>
+                <field name="date_cour" invisible="1"/>
+            </group>
+            <footer>
+                <button name="check_report" string="Imprimer" type="object" default_focus="1" class="oe_highlight"/>
+                or 
+                <button string="Annuler" class="oe_link" special="cancel" />
+            </footer>
+        </form>
+        </field>
+    </record>
+
+    <record id="action_oms_nonsorti_report" model="ir.actions.act_window">
+        <field name="name">Bons non sortis</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">oms.nonsorti.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="oms_nonsorti_report_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_oms_nonsorti_values" model="ir.values">
+        <field name="model_id" ref="oms.model_oms_commande" />
+        <field name="name">Bons non sortis</field>
+        <field name="key2">client_print_multi</field>
+        <field name="value" eval="'ir.actions.act_window,' +str(ref('action_oms_nonsorti_report'))" />
+        <field name="key">action</field>
+        <field name="model">oms.nonsorti.report</field>
+    </record>
+
+    <record id="oms_sorti_report_view" model="ir.ui.view">
+        <field name="name">Bons sortis</field>
+        <field name="model">oms.sorti.report</field>
+        <field name="arch" type="xml">
+        <form string="Bons non sortis">
+            <group col="4">
+                <field name="debut"/>
+                <field name="fin"/>
+                <field name="date_cour" invisible="1"/>
+            </group>
+            <footer>
+                <button name="check_report" string="Imprimer" type="object" default_focus="1" class="oe_highlight"/>
+                or 
+                <button string="Annuler" class="oe_link" special="cancel" />
+            </footer>
+        </form>
+        </field>
+    </record>
+
+    <record id="action_oms_sorti_report" model="ir.actions.act_window">
+        <field name="name">Bons sortis</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">oms.sorti.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="oms_sorti_report_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_oms_sorti_values" model="ir.values">
+        <field name="model_id" ref="oms.model_oms_commande" />
+        <field name="name">Bons sortis</field>
+        <field name="key2">client_print_multi</field>
+        <field name="value" eval="'ir.actions.act_window,' +str(ref('action_oms_sorti_report'))" />
+        <field name="key">action</field>
+        <field name="model">oms.sorti.report</field>
+    </record>
+
+    <record id="oms_sortiedouanemois_report_view" model="ir.ui.view">
+        <field name="name">Sorties Douane par mois</field>
+        <field name="model">oms.sortiedouanemois.report</field>
+        <field name="arch" type="xml">
+        <form string="Sorties Douane par mois">
+            <group col="4">
+                <field name="mois"/>
+                <field name="annee"/>
+                <field name="date_cour" invisible="1"/>
+            </group>
+            <footer>
+                <button name="check_report" string="Imprimer" type="object" default_focus="1" class="oe_highlight"/>
+                or 
+                <button string="Annuler" class="oe_link" special="cancel" />
+            </footer>
+        </form>
+        </field>
+    </record>
+
+    <record id="action_oms_sortiedouanemois_report" model="ir.actions.act_window">
+        <field name="name">Sorties Douane par mois</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">oms.sortiedouanemois.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="oms_sortiedouanemois_report_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_oms_sortiedouanemois_values" model="ir.values">
+        <field name="model_id" ref="oms.model_oms_commande" />
+        <field name="name">Sorties Douane par mois</field>
+        <field name="key2">client_print_multi</field>
+        <field name="value" eval="'ir.actions.act_window,' +str(ref('action_oms_sortiedouanemois_report'))" />
+        <field name="key">action</field>
+        <field name="model">oms.sortiedouanemois.report</field>
+    </record>
+
+    <record id="oms_decade_report_view" model="ir.ui.view">
+        <field name="name">Decades saisies</field>
+        <field name="model">oms.decade.report</field>
+        <field name="arch" type="xml">
+        <form string="Decades saisies">
+            <group col="4">
+                <field name="date_cour" invisible="1"/>
+            </group>
+            <footer>
+                <button name="check_report" string="Imprimer" type="object" default_focus="1" class="oe_highlight"/>
+                or 
+                <button string="Annuler" class="oe_link" special="cancel" />
+            </footer>
+        </form>
+        </field>
+    </record>
+
+    <record id="action_oms_decade_report" model="ir.actions.act_window">
+        <field name="name">Decades saisies</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">oms.decade.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="oms_decade_report_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_oms_decade_values" model="ir.values">
+        <field name="model_id" ref="oms.model_oms_commande" />
+        <field name="name">Decades saisies</field>
+        <field name="key2">client_print_multi</field>
+        <field name="value" eval="'ir.actions.act_window,' +str(ref('action_oms_decade_report'))" />
+        <field name="key">action</field>
+        <field name="model">oms.decade.report</field>
+    </record>
+</odoo>

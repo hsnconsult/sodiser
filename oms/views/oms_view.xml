@@ -1,0 +1,713 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+
+<!-- Formulaires  -->
+
+<record id="oms_decade_form" model="ir.ui.view">
+	         <field name="name">oms.decade.form</field>
+             <field name="model">oms.decade</field>
+             <field name="arch" type="xml">
+	         <form string="decades" version="7.0">
+                <sheet>
+                        <group>
+							<field name="name" />
+							<field name="debut" />
+							<field name="fin" />
+                        </group>
+                </sheet>
+                </form>
+				</field>
+	     </record>	
+	  <record id="oms_decade_tree" model="ir.ui.view">
+            <field name="name">oms.decade.tree</field>
+            <field name="model">oms.decade</field>
+            <field name="arch" type="xml">
+                <tree string="decades">
+							<field name="name" />
+							<field name="debut" />
+							<field name="fin" />
+                </tree>
+            </field>
+        </record>
+		<record id="oms_decade_search" model="ir.ui.view">
+            <field name="name">oms.decade.search</field>
+            <field name="model">oms.decade</field>
+            <field name="arch" type="xml">
+                <search string="decades">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+<record id="oms_douane_form" model="ir.ui.view">
+	         <field name="name">oms.douane.form</field>
+             <field name="model">oms.douane</field>
+             <field name="arch" type="xml">
+	         <form string="douanes" version="7.0">
+                <sheet>
+                       <group>
+                        <group>
+							<field name="iddecade" />
+							<field name="qtedeclaree" />
+							<field name="montant" />
+                        </group>
+                        <group>
+							<field name="idproduit" />
+							<field name="qteliquidee" />
+                        </group>
+                       </group>
+                </sheet>
+                </form>
+				</field>
+	     </record>	
+	  <record id="oms_douane_tree" model="ir.ui.view">
+            <field name="name">oms.douane.tree</field>
+            <field name="model">oms.douane</field>
+            <field name="arch" type="xml">
+                <tree string="douanes">
+							<field name="iddecade" />
+							<field name="idproduit" />
+							<field name="qtedeclaree" />
+							<field name="qteliquidee" />
+							<field name="montant" />
+                </tree>
+            </field>
+        </record>
+		<record id="oms_douane_search" model="ir.ui.view">
+            <field name="name">oms.douane.search</field>
+            <field name="model">oms.douane</field>
+            <field name="arch" type="xml">
+                <search string="douanes">
+                    <field name="iddecade"/>
+                </search>
+            </field>
+        </record>
+
+<record id="oms_facture_form" model="ir.ui.view">
+	         <field name="name">oms.facture.form</field>
+             <field name="model">oms.facture</field>
+             <field name="arch" type="xml">
+	         <form string="factures" version="7.0">
+                <header>
+                   <field name="state" widget="statusbar" statusbar_visible="nonreglee,reglee" />
+                </header>
+                <sheet>
+                        <group>
+							<field name="name" />
+							<field name="datefact" />
+							<field name="datesortie" />
+							<field name="totgasoil" />
+							<field name="totsuper" />
+							<field name="totddo" />
+							<field name="totpetrole" />
+							<field name="montant"/>
+                        </group>
+                       <notebook>
+                         <page string = "Lignes facture">
+                            <field name="ligne_facture" string="Détail Facture" context="{'form_view_ref':'oms_facture_ligne_form','tree_view_ref':'oms_facture_ligne_tree'}"/>
+                         </page>
+                       </notebook>
+                </sheet>
+                </form>
+				</field>
+	     </record>	
+	  <record id="oms_facture_tree" model="ir.ui.view">
+            <field name="name">oms.facture.tree</field>
+            <field name="model">oms.facture</field>
+            <field name="arch" type="xml">
+                <tree string="factures">
+							<field name="name" />
+							<field name="datefact" />
+							<field name="datesortie" />
+							<field name="totgasoil" sum="Total" />
+							<field name="totsuper" sum="Total" />
+							<field name="totddo" sum="Total"/>
+							<field name="totpetrole" sum="Total"/>
+							<field name="montant" sum="total" />
+							<field name="state" />
+                </tree>
+            </field>
+        </record>
+		<record id="oms_facture_search" model="ir.ui.view">
+            <field name="name">oms.facture.search</field>
+            <field name="model">oms.facture</field>
+            <field name="arch" type="xml">
+                <search string="factures">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+<record id="oms_facture_ligne_form" model="ir.ui.view">
+	         <field name="name">oms.facture.ligne.form</field>
+             <field name="model">oms.facture.ligne</field>
+             <field name="arch" type="xml">
+	         <form string="factures" version="7.0">
+                <sheet>
+                        <group>
+							<field name="idcommande" />
+							<field name="idlcommande" />
+							<field name="quantite" />
+							<field name="prixl" />
+							<field name="prixlh" invisible="1" />
+							<field name="montant" />
+                        </group>
+                </sheet>
+                </form>
+				</field>
+	     </record>	
+	  <record id="oms_facture_ligne_tree" model="ir.ui.view">
+            <field name="name">oms.facture.ligne.tree</field>
+            <field name="model">oms.facture.ligne</field>
+            <field name="arch" type="xml">
+                <tree string="factures" editable="bottom">
+							<field name="idcommande" />
+							<field name="idlcommande" domain="[('order_id','=',idcommande),('factures','=',False)]" on_change ="get_prixcourant(idlcommande)"/>
+							<field name="quantite" />
+							<field name="prixl" />
+							<field name="prixlh" invisible="1" />
+							<field name="montant" />
+                </tree>
+            </field>
+        </record>
+		<record id="oms_facture_ligne_search" model="ir.ui.view">
+            <field name="name">oms.facture.ligne.search</field>
+            <field name="model">oms.facture.ligne</field>
+            <field name="arch" type="xml">
+                <search string="factures">
+                    <field name="idcommande"/>
+                </search>
+            </field>
+        </record>
+
+<record id="oms_reglement_form" model="ir.ui.view">
+	         <field name="name">oms.reglement.form</field>
+             <field name="model">oms.reglement</field>
+             <field name="arch" type="xml">
+	         <form string="reglements" version="7.0">
+                <sheet>
+                        <group>
+							<field name="datereg" />
+							<field name="montant" />
+                        </group>
+                       <notebook>
+                         <page string = "Lignes reglement">
+                            <field name="ligne_reglement" string="Détail reglement" context="{'form_view_ref':'oms_reglement_ligne_form','tree_view_ref':'oms_reglement_ligne_tree'}"/>
+                         </page>
+                       </notebook>
+                </sheet>
+                </form>
+				</field>
+	     </record>	
+	  <record id="oms_reglement_tree" model="ir.ui.view">
+            <field name="name">oms.reglement.tree</field>
+            <field name="model">oms.reglement</field>
+            <field name="arch" type="xml">
+                <tree string="reglements">
+							<field name="datereg" />
+							<field name="montant" sum="total" />
+                </tree>
+            </field>
+        </record>
+		<record id="oms_reglement_search" model="ir.ui.view">
+            <field name="name">oms.reglement.search</field>
+            <field name="model">oms.reglement</field>
+            <field name="arch" type="xml">
+                <search string="reglements">
+                    <field name="datereg"/>
+                </search>
+            </field>
+        </record>
+
+<record id="oms_reglement_ligne_form" model="ir.ui.view">
+	         <field name="name">oms.reglement.ligne.form</field>
+             <field name="model">oms.reglement.ligne</field>
+             <field name="arch" type="xml">
+	         <form string="reglements" version="7.0">
+                <sheet>
+                        <group>
+							<field name="idfacture" />
+							<field name="montant" />
+                        </group>
+                </sheet>
+                </form>
+				</field>
+	     </record>	
+	  <record id="oms_reglement_ligne_tree" model="ir.ui.view">
+            <field name="name">oms.reglement.ligne.tree</field>
+            <field name="model">oms.reglement.ligne</field>
+            <field name="arch" type="xml">
+                <tree string="reglements" editable="bottom">
+							<field name="idfacture" />
+							<field name="montant" />
+                </tree>
+            </field>
+        </record>
+		<record id="oms_reglement_ligne_search" model="ir.ui.view">
+            <field name="name">oms.reglement.ligne.search</field>
+            <field name="model">oms.reglement.ligne</field>
+            <field name="arch" type="xml">
+                <search string="reglements">
+                    <field name="idfacture"/>
+                </search>
+            </field>
+        </record>
+<record id="oms_zone_form" model="ir.ui.view">
+	         <field name="name">oms.zone.form</field>
+             <field name="model">oms.zone</field>
+             <field name="arch" type="xml">
+	         <form string="zones" version="7.0">
+                <sheet>
+                        <group>
+							<field name="name" />
+                        </group>
+                </sheet>
+                </form>
+				</field>
+	     </record>	
+	  <record id="oms_zone_tree" model="ir.ui.view">
+            <field name="name">oms.zone.tree</field>
+            <field name="model">oms.zone</field>
+            <field name="arch" type="xml">
+                <tree string="zones">
+							<field name="name" />
+                </tree>
+            </field>
+        </record>
+		<record id="oms_zone_search" model="ir.ui.view">
+            <field name="name">oms.zone.search</field>
+            <field name="model">oms.zone</field>
+            <field name="arch" type="xml">
+                <search string="zones">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+<record id="oms_prixzone_form" model="ir.ui.view">
+	         <field name="name">oms.prixzone.form</field>
+             <field name="model">oms.prixzone</field>
+             <field name="arch" type="xml">
+	         <form string="prixzones" version="7.0">
+                <sheet>
+                        <group>
+							<field name="name" />
+							<field name="pvm" />
+                        </group>
+                </sheet>
+                </form>
+				</field>
+	     </record>	
+	  <record id="oms_prixzone_tree" model="ir.ui.view">
+            <field name="name">oms.prixzone.tree</field>
+            <field name="model">oms.prixzone</field>
+            <field name="arch" type="xml">
+                <tree string="prixzones" editable="bottom">
+							<field name="name" />
+							<field name="pvm" />
+                </tree>
+            </field>
+        </record>
+		<record id="oms_prixzone_search" model="ir.ui.view">
+            <field name="name">oms.prixzone.search</field>
+            <field name="model">oms.prixzone</field>
+            <field name="arch" type="xml">
+                <search string="prixzones">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+	<!--Héritages  --> 
+       <record id="view_oms_produit_form" model="ir.ui.view">
+            <field name="name">Produit.ext</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='list_price']" position="after">
+                      <field name="ouaga" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                      <field name="bobo" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                </xpath>
+				<xpath expr="//page[1]" position="after">  
+                                     <page string="Prix de vente par Zone">                                 
+                                         <field name="ligne_prixzone" string="Prix de vente par Zone"  />
+                                     </page>
+               </xpath>  
+            </field>
+        </record>
+       <record id="view_oms_saleorder_form" model="ir.ui.view">
+            <field name="name">Saleorder.ext</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                      <field name="localite"/>
+                      <field name="datecom"/>
+                </xpath>
+                <xpath expr="//field[@name='pricelist_id']" position="attributes">
+                      <attribute name="readonly">1</attribute>
+                </xpath>
+                <!--<xpath expr="//field[@name='note']" position="after">
+                            <group class="oe_subtotal_footer oe_left" colspan="2" name="sale_avoir">
+                                <field name="champvide"/>
+                                <field name="champvide"/>
+                                <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                    <label for="amount_avoir"/>
+                                    <button name="button_dummy"
+                                        states="draft,sent" string="(update)" type="object" class="oe_edit_only oe_link"/>
+                                </div>
+                                <field name="amount_avoir" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                            </group>
+                            <group class="oe_subtotal_footer oe_left" colspan="2" name="sale_totalo">
+                                <field name="amount_untaxedo" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                <field name="amount_taxo" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                    <label for="amount_total" />
+                                    <button name="button_dummy"
+                                        states="draft,sent" string="(update)" type="object" class="oe_edit_only oe_link"/>
+                                </div>
+                                <field name="amount_totalo" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                </xpath>-->
+            </field>
+        </record>
+        <!--<record id="view_oms_saleorderline_tree" model="ir.ui.view">
+            <field name="name">Saleorderline.ext</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='price_subtotal']" position="before">
+                      <field name="pu_officiel"/>
+                </xpath>
+                <xpath expr="//field[@name='price_subtotal']" position="after">
+                      <field name="price_subtotalo"/>
+                      <field name="factures"/>
+                </xpath>
+                <xpath expr="//tree/field[@name='price_unit']" position="attributes">
+                      <attribute name="attrs">{"invisible":"true"}</attribute>
+                </xpath>
+            </field>
+        </record>-->
+       <record id="view_oms_invoice_form" model="ir.ui.view">
+            <field name="name">Invoice.ext</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='comment']" position="before">
+                            <group class="oe_subtotal_footer oe_left" colspan="2" name="invoice_avoir">
+                                <field name="champvide"/>
+                                <field name="champvide"/>
+                                <field name="amount_avoir" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                            </group>
+                            <group class="oe_subtotal_footer oe_left" colspan="2" name="sale_totalo">
+                                <field name="amount_untaxedo" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                <field name="amount_taxo" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                <field name="amount_totalo" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                    <!--<button name="setprice" string="Corriger prix" type="object" class="btn-primary"/>-->
+                    <button name="setdate" string="Corriger date" type="object" class="btn-primary"/>
+                </xpath>
+                <xpath expr="//field[@name='outstanding_credits_debits_widget']" position="replace" />
+
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                      <field name="numbeman"/>
+                </xpath>
+            </field>
+        </record>
+       <record id="view_oms_invoiceline_tree" model="ir.ui.view">
+            <field name="name">Invoiceline.ext</field>
+            <field name="model">account.invoice.line</field>
+            <field name="inherit_id" ref="account.view_invoice_line_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='discount']" position="after">
+                      <field name="pu_officiel"/>
+                      <field name="price_subtotalo"/>
+                </xpath>
+            </field>
+        </record>
+       <record id="view_oms_partner_form" model="ir.ui.view">
+            <field name="name">Partner.ext</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='street']" position="before">
+                      <field name="idzone"/>
+                </xpath>
+            </field>
+        </record>
+       <record id="view_oms_payment_form" model="ir.ui.view">
+            <field name="name">Payment.ext</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='communication']" position="after">
+                      <field name="objet"/>
+                </xpath>
+            </field>
+        </record>
+
+      <!-- <record id="view_oms_accountmove_form" model="ir.ui.view">
+            <field name="name">Move.ext</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_move_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date']" position="after">
+                  <filter string="Caisse" domain="[('journal_id.name','=','CAISSE OUAGA')]" context="{'default_journal_name': 'CAISSE OUAGA'}"/>
+                  <filter string="SONABHY" domain="[('journal_id.name','=','Achats SONABHY')]" context="{'default_journal_name': 'Achats SONABHY'}"/>
+                  <filter string="Douane" domain="[('journal_id.name','=','Achats Douane')]" context="{'default_journal_name': 'Achats Douane'}"/>
+                  <filter string="CORIS" domain="[('journal_id.name','=','CORIS')]" context="{'default_journal_name': 'CORIS'}"/>
+                </xpath>
+            </field>
+        </record> -->
+
+	<!--Actions  --> 
+ 
+       <record id="view_oms_company_form" model="ir.ui.view">
+            <field name="name">Company.ext</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='country_id']" position="after">
+                      <field name="arretecom"/>
+                      <field name="arretefact"/>
+                </xpath>
+            </field>
+        </record>
+<record model="ir.actions.act_window" id="action_oms_decade">
+      <field name="name">decades</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">oms.decade</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="oms_decade_tree"/>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Cliquer ici pour ajouter une decade.
+        </p>
+      </field>
+    </record> 
+<record model="ir.actions.act_window" id="action_oms_facture">
+      <field name="name">factures</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">oms.facture</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="oms_facture_tree"/>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Cliquer ici pour ajouter une facture SONABHY.
+        </p>
+      </field>
+    </record> 
+<record model="ir.actions.act_window" id="action_oms_facture_ligne">
+      <field name="name">lignefactures</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">oms.facture.ligne</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="oms_facture_tree"/>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Cliquer ici pour ajouter une ligne de facture.
+        </p>
+      </field>
+    </record> 
+<record model="ir.actions.act_window" id="action_oms_douane">
+      <field name="name">douanes</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">oms.douane</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="oms_douane_tree"/>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Cliquer ici pour ajouter un document douane.
+        </p>
+      </field>
+    </record>
+<record model="ir.actions.act_window" id="action_oms_reglement">
+      <field name="name">reglements</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">oms.reglement</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="oms_reglement_tree"/>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Cliquer ici pour ajouter un règlement.
+        </p>
+      </field>
+    </record> 
+<record model="ir.actions.act_window" id="action_oms_zone">
+      <field name="name">zones</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">oms.zone</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="oms_zone_tree"/>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Cliquer ici pour ajouter une zone.
+        </p>
+      </field>
+    </record> 
+	<!-- ANALYSES -->   
+	  <record id="oms_vuvente_tree" model="ir.ui.view">
+            <field name="name">oms.vuvente.tree</field>
+            <field name="model">oms.vuvente</field>
+            <field name="arch" type="xml">
+                <tree string="analyse des ventes" create="false">
+							<field name="datebon" />
+							<field name="numbon" />
+							<field name="client" />
+							<field name="localite" />
+							<field name="produit" />
+							<field name="volume" sum="totm"/>
+                            <field name="montant" sum="totm"/>
+                            <field name="annee" invisible="1"/>
+                            <field name="mois" invisible="1"/>
+                            <field name="jour" invisible="1"/>
+                            <field name="trimestre" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+		<!--<record id="oms_vuvente_search" model="ir.ui.view">
+            <field name="name">oms.vuvente.search</field>
+            <field name="model">oms.vuvente</field>
+            <field name="arch" type="xml">
+                <search string="analyse des ventes">
+                    <field name="client"/>
+                <filter  string="SUPER 91" domain="[('produit','=','SUPER 91')]"/>
+                <filter  string="GASOIL" domain="[('produit','=','GASOIL')]"/>
+                <filter  string="DDO" domain="[('produit','=','DDO')]"/>
+                <filter  string="PETROLE" domain="[('produit','=','PETROLE')]"/>
+                <separator/>
+                <filter  string="OUAGA" domain="[('localite','=','ouaga')]"/>
+                <filter  string="BOBO" domain="[('localite','=','bobo')]"/>
+                <group expand="0" string="Regrouper Par...">
+                    <filter string="Client" icon="terp-partner"  name="client" context="{'group_by':'client'}"/>
+                    <filter string="Produit" icon="terp-accessories-archiver" context="{'group_by':'produit'}"/>
+                    <filter string="Localite" icon="terp-accessories-archiver" context="{'group_by':'localite'}"/>
+                    <filter string="Jour" icon="terp-go-today" context="{'group_by':'jour'}" help="Date de la vente"/>
+                    <filter string="Mois" name="mois" icon="terp-go-month" context="{'group_by':'mois'}" help="Mois de la vente"/>
+                    <filter string="Trimestre" name="mois" icon="terp-go-month" context="{'group_by':'trimestre'}" help="Trimestre de la vente"/>
+                    <filter string="Année" icon="terp-go-year" context="{'group_by':'annee'}" help="Année de la vente"/>
+                </group>
+                </search>
+            </field>
+        </record>-->
+		<record id="oms_vuvente_graph" model="ir.ui.view">
+            <field name="name">oms.vuvente.graph</field>
+            <field name="model">oms.vuvente</field>
+            <field name="arch" type="xml">
+                <graph string="analyse des ventes">
+                    <field name="client"/>
+                    <field name="volume"/>
+                    <field name="datebon" interval="week"/>
+                </graph>
+            </field>
+        </record> 
+    <record id="oms_vuvente_pivot" model="ir.ui.view">
+         <field name="name">oms.vuvente.pivot</field>
+         <field name="model">oms.vuvente</field>
+         <field name="arch" type="xml">
+             <pivot string="Analyse des ventes" disable_linking="True">
+                 <field name="datebon" type="col" interval="month"/>
+                 <field name="client" type="row"/>
+                 <field name="volume" type="measure"/>
+             </pivot>
+         </field>
+    </record>
+<record model="ir.actions.act_window" id="action_oms_vuvente">
+      <field name="name">vuventes</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">oms.vuvente</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,pivot,graph</field>
+      <field name="view_id" ref="oms_vuvente_tree"/>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Cliquer ici pour ajouter un volume
+        </p>
+      </field>
+    </record>
+
+	  <record id="oms_vuclient_tree" model="ir.ui.view">
+            <field name="name">oms.vuclient.tree</field>
+            <field name="model">oms.vuclient</field>
+            <field name="arch" type="xml">
+                <tree string="analyse des soldes clients" create="false">
+							<field name="dateop" />
+							<field name="idclient" />
+							<field name="reference" />
+							<field name="typeop" />
+							<field name="montantcom" sum="totm"/>
+                            <field name="montantpaie" sum="totm"/>
+                            <field name="solde" sum="totm"/>
+                            <field name="annee" invisible="1"/>
+                            <field name="mois" invisible="1"/>
+                            <field name="jour" invisible="1"/>
+                            <field name="trimestre" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+		<!--<record id="oms_vuclient_search" model="ir.ui.view">
+            <field name="name">oms.vuclient.search</field>
+            <field name="model">oms.vuclient</field>
+            <field name="arch" type="xml">
+                <search string="analyse des soldes clients">
+                    <field name="idclient"/>
+                <filter  string="Commandes" domain="[('typeop','=','commande')]"/>
+                <filter  string="Règlements" domain="[('typeop','=','reglement')]"/>
+                <group expand="0" string="Regrouper Par...">
+                    <filter string="Client" icon="terp-partner"  name="client" context="{'group_by':'idclient'}"/>
+                    <filter string="Mouvement" icon="terp-accessories-archiver" context="{'group_by':'typeop'}"/>
+                    <filter string="Jour" icon="terp-go-today" context="{'group_by':'jour'}" help="Date de la vente"/>
+                    <filter string="Mois" name="mois" icon="terp-go-month" context="{'group_by':'mois'}" help="Mois de la vente"/>
+                    <filter string="Trimestre" name="mois" icon="terp-go-month" context="{'group_by':'trimestre'}" help="Trimestre de la vente"/>
+                    <filter string="Année" icon="terp-go-year" context="{'group_by':'annee'}" help="Année de la vente"/>
+                </group>
+                </search>
+            </field>
+        </record>-->
+		<record id="oms_vuclient_graph" model="ir.ui.view">
+            <field name="name">oms.vuclient.graph</field>
+            <field name="model">oms.vuclient</field>
+            <field name="arch" type="xml">
+                <graph string="analyse des soldes clients">
+                    <field name="idclient"/>
+                    <field name="montantcom"/>
+                    <field name="dateop" interval="week"/>
+                </graph>
+            </field>
+        </record> 
+    <record id="oms_vuclient_pivot" model="ir.ui.view">
+         <field name="name">oms.vuclient.pivot</field>
+         <field name="model">oms.vuclient</field>
+         <field name="arch" type="xml">
+             <pivot string="Analyse des soldes clients" disable_linking="True">
+                 <field name="dateop" type="col" interval="month"/>
+                 <field name="idclient" type="row"/>
+                 <field name="montantcom" type="measure"/>
+                 <field name="montantpaie" type="measure"/>
+                 <field name="solde" type="measure"/>
+             </pivot>
+         </field>
+    </record>
+<record model="ir.actions.act_window" id="action_oms_vuclient">
+      <field name="name">vuclients</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">oms.vuclient</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,pivot,graph</field>
+      <field name="view_id" ref="oms_vuclient_tree"/>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          Cliquer ici pour ajouter un volume
+        </p>
+      </field>
+    </record>
+
+	 </data>
+</openerp>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+<template id="minimal_layout_inherit" inherit_id="web.minimal_layout">
+		<xpath expr="//head" position="inside">
+			<link rel='stylesheet' href="/oms/static/src/css/oms.css"/>
+		</xpath>
+</template>
+<template id="report_avoir">
+    <t t-call="web.html_container">
+        <t t-set="data_report_margin_top" t-value="12"/>
+        <t t-set="data_report_header_spacing" t-value="9"/>
+        <t t-set="data_report_dpi" t-value="110"/>
+        <t t-foreach="docs" t-as="o">
+         <t t-call="web.basic_layout">
+        <div class="page">
+            <div class="vide">
+
+            </div>
+
+            <h2>
+                <span t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')" class="titre">Avoir N°</span>
+                <span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
+                <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
+                <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
+                <span t-if="o.type == 'out_refund'">Refund</span>
+                <span t-if="o.type == 'in_refund'">Vendor Refund</span>
+                <span t-if="o.type == 'in_invoice'">Vendor Bill</span>
+                <span t-field="o.number" class="poste"/>
+            </h2>
+                    <p><div align="right" class="titre" style="width:70%">Doit: </div></p>
+            <div class="entete" style="width:35%">
+						<table class="table table-condensed invoice_tbody poste" width="35%">
+  							<thead><tr><th width="50%">DATE</th><th>REFERENCE</th></tr></thead>
+  							<tbody><tr><td><span t-esc="o.date_invoice" t-esc-options='{"widget": "date"}'/></td><td><span t-esc="o.origin"/></td></tr></tbody>
+						</table>
+            </div>
+                      <div class="entete info" style="width:60%;float:right">
+                           <span><strong>Nom:...</strong></span> <span t-esc="o.partner_id.name" /><br/>
+                           <span><strong>Adresse:</strong></span>... <span t-esc="o.partner_id.street" /><br/>
+                           <span><strong>Code postal:</strong></span>... <span t-esc="o.partner_id.zip" />... <span><strong>Ville:</strong></span>... <span t-esc="o.partner_id.city" />... <span><strong>Pays:</strong></span>... <span t-esc="o.partner_id.country_id.name" /><br/>
+                           <span><strong>Téléphone:</strong></span>... <span t-esc="o.partner_id.phone" /><br/>
+                      </div>
+
+            <!-- Is there a discount on at least one line? -->
+
+          <div class="tableaufact">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Montant Avoir</th>
+                    </tr>
+                </thead>
+                <tbody class="invoice_tbody poste">
+                    <tr>
+                        <td><span t-field="o.amount_avoir"/></td>
+                    </tr>
+                </tbody>
+            </table>
+                     <div class="poste esp"><span>Arretée la présente à la somme de :<br/></span> <span t-esc="o.compute_amount_avoir_text()" style="color:#800000"/><span style="color:#800000">  (<span t-esc="'{:,.0f}'.format(o.amount_avoir).replace(',', ' ').replace('.', ',')"/>) Francs CFA</span><br/></div>
+                      <div class="signature2 poste">
+						Pour SODIS OIL<br/><br/><br/><br/><br/>
+                        Le Directeur Général
+                      </div>
+          </div>
+        </div>
+    </t>
+    </t>
+    </t>
+</template>
+</data>
+</odoo>

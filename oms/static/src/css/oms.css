@@ -1,0 +1,163 @@
+
+/* CSS Document */
+
+  .espacen {
+    min-height: 120px;   
+  }
+  .espacedoit {
+    min-height: 100px;   
+  }
+  table thead tr th{
+    font-size:22px;
+    border-right: 1px solid #000;
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+    /*background-color:#EAEAEA;*/
+    font-family:Arial, Helvetica, sans-serif;
+    text-align:center;
+    vertical-align:middle;
+  }
+  .titre {
+    font-size:24px;
+    font-weight:bold;
+    font-family:Arial;
+  }
+  .tableau {
+    padding-top: 40px;
+    min-height: 360px;
+    
+  }
+  .tableaufact {
+    margin-top: 100px;
+    min-height: 500px;
+    
+  }
+  .vide {
+    min-height: 200px;
+    
+  }
+  .table {
+    width:100%;
+    border: 1px solid #000;
+  }
+  table tr td {
+    border-right: 1px solid #000;
+    vertical-align: middle;
+  }
+  table tr td .total {
+    border-top: 1px solid #000;
+  }
+
+  .poste {
+    font-size:22px;
+    font-family:Arial;
+  }
+
+  .info {
+    font-size:18px;
+    font-family:Arial;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding-left:10px;
+    line-height: 30px;
+  }
+
+  .entete {
+    display: inline-table;
+    vertical-align: top;
+   }
+
+  .signature {
+    display: inline-table;
+    vertical-align: top;
+    font-weight:bold;
+    margin-top: 10px;
+   }
+  .signature2 {
+    display: inline-table;
+    vertical-align: top;
+    font-weight:bold;
+    margin-top: 10px;
+    width: 30%;
+    float: right;
+    text-align:center;
+   }
+  .esp {
+    margin-top: 40px;
+    font-style:italic;
+    font-weight:bold;
+   }
+  .esps {
+    margin-top: 10px;
+    font-style:italic;
+    font-weight:bold;
+    border: 1px solid #ccc;
+   }
+ input[type=checkbox] {
+  vertical-align: top;
+  position: relative;
+  top: 4px;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #000;
+    margin: 1em 0;
+    padding: 0;
+}
+
+
+
+  .titrerecu {
+    font-size:32px;
+    font-weight:bold;
+    font-family:cambria;
+    font-style:italic;
+  }
+  .soustitrerecu {
+    font-size:11px;
+    font-family:cambria;
+    font-weight:normal;
+    font-style:normal;
+  }
+  .bpfrecu {
+    font-size:36px;
+    font-family:cambria;
+    margin-top:20px;
+    margin-bottom:20px;
+  }
+  .montant {
+    font-size:32px;
+    font-weight:bold;
+    font-family:cambria;
+    border: 1px solid #333;
+    padding: 2px 2px 2px 2px;
+  }
+  .aposte {
+    background-image: url(../img/apsodis.png);
+    background-repeat:no-repeat;
+    background-position:center;
+  }
+  .titrecaisse {
+    font-size:32px;
+    font-family:Times;
+  }
+  #basrecu {
+    min-height: 300px;
+    border-bottom: 1px dashed #000;
+  }
+  #recbas {
+    padding-top: 80px;
+  }
+  .tabbe tr td {
+    border: 1px solid #000;
+    vertical-align: middle;
+    line-height:50px;
+    padding:2px;
+  }
+  .tabbe tr th {
+    border: 1px solid #000;
+    vertical-align: middle;
+    line-height:50px;
+  }

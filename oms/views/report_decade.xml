@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="minimal_layout_inherit" inherit_id="report.minimal_layout">
+		<xpath expr="//head" position="inside">
+			<link rel='stylesheet' href="/venteprev/static/src/css/venteprev.css"/>
+		</xpath>
+</template>
+
+<template id="report_decade">
+    <t t-call="report.html_container">
+        <t t-set="data_report_margin_top" t-value="12"/>
+        <t t-set="data_report_header_spacing" t-value="9"/>
+        <t t-set="data_report_dpi" t-value="110"/>
+        <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <img t-att-src="'/venteprev/static/src/img/logo.png'" />
+                    <p><div align="left" class="print">Imprimé le <span t-esc="data['date_cour']" t-esc-options='{"widget": "date"}' /></div></p>
+                     <p> </p><p> </p>
+                    <p><div align="center" class="titre">Etat des décades saisies </div></p>
+                     <p> </p><p> </p>
+						<table class="table table-bordered">
+                          <thead class="titrecol">
+  							<tr>
+							    <td>Décade</td>
+							    <td>Produit</td>
+							    <td>Qte déclarée</td>
+							    <td>Qte liquidée</td>
+							    <td>Montant</td>
+							</tr>
+                          </thead>
+                         <tbody class="poste table-line">
+                          <t t-foreach="dlines" t-as="dline">
+                            <tr>
+                                <td><span t-esc="dline['decade']"/></td>
+                                <td><span t-esc="dline['produit']"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(dline['qtedeclaree']).replace(',', ' ').replace('.', ',')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(dline['qteliquidee']).replace(',', ' ').replace('.', ',')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(dline['montant']).replace(',', ' ').replace('.', ',')"/></td>
+							</tr>
+                          </t>
+                         </tbody>
+						</table>
+
+                </div>
+        </t>
+    </t>
+</template>
+</odoo>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="minimal_layout_inherit" inherit_id="web.minimal_layout">
+		<xpath expr="//head" position="inside">
+			<link rel='stylesheet' href="/oms/static/src/css/oms.css"/>
+		</xpath>
+</template>
+<template id="report_bliv">
+    <t t-call="web.html_container">
+        <t t-set="data_report_margin_top" t-value="12"/>
+        <t t-set="data_report_header_spacing" t-value="9"/>
+        <t t-set="data_report_dpi" t-value="110"/>
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <img t-att-src="'/oms/static/src/img/logo.png'" />
+                    <p><div align="center" class="titre">BON DE LIVRAISON N°  </div></p>
+                     <p> </p><p> </p>
+                      <div class="entete" style="width:50%;">
+						<table class="table table-bordered poste">
+  							<tr><td width="60%">Date:</td><td><span t-esc="o.confirmation_date" t-esc-options='{"widget": "date"}'/></td></tr>
+  							<tr><td>Nom du client:</td><td><span t-esc="o.partner_id.name" /></td></tr>
+  							<tr><td>Bon d'enlèvement N°</td><td><span t-esc="o.numbe" /></td></tr>
+						</table>
+                      </div>
+                      <div class="entete" style="width:48%; float:right">
+						<table class="table table-bordered poste">
+  							<tr><td width="50%">Transporteur:</td><td></td></tr>
+  							<tr><td>N° du Camion:</td><td></td></tr>
+  							<tr><td>Lieu:</td><td><span t-esc="o.localite" /></td></tr>
+						</table>
+                      </div>
+                      <div id="tableau">
+						<table class="table table-bordered">
+                          <thead class="titrecol">
+  							<tr>
+							    <td>Produit</td>
+							    <td>Quantité</td>
+							    <td width="50%">Observations</td>
+							</tr>
+                          </thead>
+                         <tbody class="poste">
+                          <t t-foreach="o.order_line" t-as="oline">
+                            <tr><td><span t-esc="oline.product_id.name"/></td><td align="right"><span t-esc="'{:,.0f}'.format(oline.product_uom_qty).replace(',', ' ').replace('.', ',')"/></td><td></td></tr>
+                          </t>
+                         </tbody>
+						</table>
+                      </div>
+                     <div id="partenaire2" class="poste">
+                      <div id="pied" style="width:40%;">
+                          <strong>Chauffeur</strong>
+						<table class="table table-bordered poste">
+  							<tr><td width="30%">Nom:</td><td></td></tr>
+  							<tr><td>Prénoms:</td><td></td></tr>
+  							<tr><td>Ref. CNIB:</td><td></td></tr>
+  							<tr><td>Date</td><td></td></tr>
+  							<tr><td>Signature:</td><td></td></tr>
+						</table>
+                      </div>
+                     <div id="piedd" style="width:40%;">
+                          <strong>Réceptionniste</strong>
+						<table class="table table-bordered poste">
+  							<tr><td width="30%">Nom:</td><td></td></tr>
+  							<tr><td>Prénoms:</td><td></td></tr>
+  							<tr><td>Ref. CNIB:</td><td></td></tr>
+  							<tr><td>Date</td><td></td></tr>
+  							<tr><td>Signature:</td><td></td></tr>
+						</table>
+                      </div>
+                    </div>
+
+		<div class="pdp">
+            <hr/>
+            RCCM N° BFOUA00000 - Agrément N°00/000 - IFU N°00000000F - Compte BANK N°0101010101-00<br/>
+            Division Fiscale : DGE - Régime du Réel Normal        
+		</div>
+                </div>
+        </t>
+        </t>
+    </t>
+</template>
+</odoo>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="minimal_layout_inherit" inherit_id="report.minimal_layout">
+		<xpath expr="//head" position="inside">
+			<link rel='stylesheet' href="/oms/static/src/css/oms.css"/>
+		</xpath>
+</template>
+<template id="report_facture">
+    <t t-call="report.html_container">
+        <t t-set="data_report_margin_top" t-value="12"/>
+        <t t-set="data_report_header_spacing" t-value="9"/>
+        <t t-set="data_report_dpi" t-value="110"/>
+        <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <img t-att-src="'/oms/static/src/img/logo.png'" />
+                    <p><div align="right" class="titre">FACTURE N°  <span t-esc="o.number" /></div></p>
+                    <p><div align="right" class="titre">Ouagadougou, le <span t-esc="o.date_invoice" t-esc-options='{"widget": "date"}'/></div></p>
+                     <p> </p><p> </p>
+                    <p><div align="left" class="titre">Doit: </div></p>
+                      <div class="entete" style="width:58%;">
+						<table class="table table-borderedp postefact">
+  							<tr><td width="45%">Nom ou Raison sociale:</td><td><span t-esc="o.partner_id.name" /></td></tr>
+  							<tr><td>RCCM</td><td></td></tr>
+  							<tr><td>IFU:</td><td></td></tr>
+						</table>
+                      </div>
+                    <p><div align="center" class="titre">FOURNITURE DE PRODUITS PETROLIERS</div></p>
+                      <div>
+						<table class="table table-borderedp">
+                          <thead class="titrecol">
+  							<tr>
+							    <td>Désignation</td>
+							    <td>Quantité</td>
+							    <td>Prix Unitaire</td>
+							    <td>Montant</td>
+							</tr>
+                          </thead>
+                         <tbody class="postefact">
+                          <t t-foreach="o.invoice_line_ids" t-as="oline">
+                            <tr><td><span t-esc="oline.product_id.name"/></td><td align="right"><span t-esc="'{:,.0f}'.format(oline.quantity).replace(',', ' ').replace('.', ',')"/></td><td align="right"><span t-esc="'{:,.0f}'.format(oline.product_id.list_price*oline.quantity).replace(',', ' ').replace('.', ',')"/></td><td align="right"><span t-esc="'{:,.0f}'.format(oline.price_subtotal).replace(',', ' ').replace('.', ',')"/></td></tr>
+                          </t>
+  							<tr><td colspan = "3"><strong>TOTAL</strong></td><td align="right"><span t-esc="'{:,.0f}'.format(o.amount_total).replace(',', ' ').replace('.', ',')"/></td></tr>
+                         </tbody>
+						</table>
+                      </div>
+                    <p><div align="left" class="titre">Arrêtée, la présente facture à la somme de: <br/><br/> <span t-esc="o.compute_amount_text()" style="color:#800000"/><span style="color:#800000">  (<span t-esc="'{:,.0f}'.format(o.amount_total).replace(',', ' ').replace('.', ',')"/>) Francs CFA</span></div></p>
+<br/><br/><br/><br/><br/>
+                      <div id="signature2">
+						Pour SODIS OIL<br/><br/><br/><br/><br/>
+                        Le Directeur Général
+                      </div>
+		<div class="pdp">
+            <hr/>
+            RCCM N° BFOUA00000 - Agrément N°00/000 - IFU N°00000000F - Compte BANK N°0101010101-00<br/>
+            Division Fiscale : DGE - Régime du Réel Normal        
+		</div>
+                </div>
+        </t>
+    </t>
+</template>
+</odoo>

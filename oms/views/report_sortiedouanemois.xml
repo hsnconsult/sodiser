@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="minimal_layout_inherit" inherit_id="report.minimal_layout">
+		<xpath expr="//head" position="inside">
+			<link rel='stylesheet' href="/venteprev/static/src/css/venteprev.css"/>
+		</xpath>
+</template>
+
+<template id="report_sortiedouanemois">
+    <t t-call="report.html_container">
+        <t t-set="data_report_margin_top" t-value="12"/>
+        <t t-set="data_report_header_spacing" t-value="9"/>
+        <t t-set="data_report_dpi" t-value="110"/>
+        <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <img t-att-src="'/venteprev/static/src/img/logo.png'" />
+                    <p><div align="left" class="print">Imprimé le <span t-esc="data['date_cour']" t-esc-options='{"widget": "date"}' /></div></p>
+                     <p> </p><p> </p>
+                    <p><div align="center" class="titre">Etat comparatif Sorties et Douane de <span t-esc="data['mois']"/> / <span t-esc="data['annee']"/> </div></p>
+                     <p> </p><p> </p>
+						<table class="table table-bordered">
+                          <thead class="titrecol">
+  							<tr>
+							    <td style="border:1px solid #000"><strong>Décade</strong></td>
+							    <td colspan="3" style="border:1px solid #000"><strong>1ère Décade</strong></td>
+							    <td colspan="3" style="border:1px solid #000"><strong>2ème Décade</strong></td>
+							    <td colspan="3" style="border:1px solid #000"><strong>3ème Décade</strong></td>
+							</tr>
+							<tr><td style="border:1px solid #000"><strong>Produit</strong></td><td style="border:1px solid #000">Sortie</td><td style="border:1px solid #000">Douane</td><td style="border:1px solid #000">Ecart</td><td style="border:1px solid #000">Sortie</td><td style="border:1px solid #000">Douane</td><td style="border:1px solid #000">Ecart</td><td style="border:1px solid #000">Sortie</td><td style="border:1px solid #000">Douane</td><td style="border:1px solid #000">Ecart</td></tr>
+                          </thead>
+                         <tbody class="poste">
+                          <t t-foreach="sdmlines" t-as="sdmline">
+                            <tr>
+                               <td style="border-left:1px solid #000;border-right:1px solid #000;"><span t-esc="sdmline['produit']"/></td>
+                               <td align="right"><span t-esc="'{:,.0f}'.format(sdmline['qtesortie1']).replace(',', ' ').replace('.', ',')"/></td>
+                               <td align="right"><span t-esc="'{:,.0f}'.format(sdmline['qtedeclaree1']).replace(',', ' ').replace('.', ',')"/></td>
+                               <td align="right" style="border-right:1px solid #000"><span t-esc="'{:,.0f}'.format(sdmline['ecart1']).replace(',', ' ').replace('.', ',')"/></td>
+                               <td align="right"><span t-esc="'{:,.0f}'.format(sdmline['qtesortie2']).replace(',', ' ').replace('.', ',')"/></td>
+                               <td align="right"><span t-esc="'{:,.0f}'.format(sdmline['qtedeclaree2']).replace(',', ' ').replace('.', ',')"/></td>
+                               <td align="right" style="border-right:1px solid #000"><span t-esc="'{:,.0f}'.format(sdmline['ecart2']).replace(',', ' ').replace('.', ',')"/></td>
+                               <td align="right"><span t-esc="'{:,.0f}'.format(sdmline['qtesortie3']).replace(',', ' ').replace('.', ',')"/></td>
+                               <td align="right"><span t-esc="'{:,.0f}'.format(sdmline['qtedeclaree3']).replace(',', ' ').replace('.', ',')"/></td>
+                               <td align="right" style="border-right:1px solid #000"><span t-esc="'{:,.0f}'.format(sdmline['ecart3']).replace(',', ' ').replace('.', ',')"/></td>
+							</tr>
+                          </t>
+                         </tbody>
+						</table>
+
+                </div>
+        </t>
+    </t>
+</template>
+</odoo>

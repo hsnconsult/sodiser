@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="minimal_layout_inherit" inherit_id="report.minimal_layout">
+		<xpath expr="//head" position="inside">
+			<link rel='stylesheet' href="/venteprev/static/src/css/venteprev.css"/>
+		</xpath>
+</template>
+
+<template id="report_sortiedouanetot">
+    <t t-call="report.html_container">
+        <t t-set="data_report_margin_top" t-value="12"/>
+        <t t-set="data_report_header_spacing" t-value="9"/>
+        <t t-set="data_report_dpi" t-value="110"/>
+        <t t-foreach="docs" t-as="o">
+        <t t-foreach="doc_ids" t-as="doc_id">
+         <t t-raw="translate_doc(doc_id, doc_model, 'request.env.user.partner_id.lang', 'hydro.report_sortiedouanetot')"/>
+        </t>
+                <div class="page">
+                    <img t-att-src="'/venteprev/static/src/img/logo.png'" />
+                    <p><div align="left" class="print">Imprimé le <span t-esc="data['date_cour']" t-esc-options='{"widget": "date"}' /></div></p>
+                     <p> </p><p> </p>
+                    <p><div align="center" class="titre">Etat comparatif Sorties Douane de la <span t-esc="data['decade'][1]"/></div></p>
+                     <p> </p><p> </p>
+						<table class="table table-bordered">
+                          <thead class="titrecol">
+  							<tr>
+							    <td>Produit</td>
+							    <td>Quantité Sortie</td>
+							    <td>Quantité Déclarée Douane</td>
+							    <td>Ecart</td>
+							    <td>Montant Sorties</td>
+							</tr>
+                          </thead>
+                         <tbody class="poste">
+                          <t t-foreach="sdlines" t-as="sdline">
+                            <tr><td><span t-esc="sdline['produit']"/></td><td align="right"><span t-esc="'{:,.0f}'.format(sdline['qtesortie']).replace(',', ' ').replace('.', ',')"/></td><td align="right"><span t-esc="'{:,.0f}'.format(sdline['qtedeclaree']).replace(',', ' ').replace('.', ',')"/></td><td align="right"><span t-esc="'{:,.0f}'.format(sdline['ecart']).replace(',', ' ').replace('.', ',')"/></td><td align="right"><span t-esc="'{:,.0f}'.format(sdline['montant']).replace(',', ' ').replace('.', ',')"/></td></tr>
+                          </t>
+                         </tbody>
+						</table>
+
+                    <p><div align="center" class="titre">Détail des sorties</div></p>
+                     <p> </p><p> </p>
+						<table class="table table-bordered">
+                          <thead class="titrecol">
+  							<tr>
+							    <td>Produit</td>
+							    <td>Numero Facture SONABHY</td>
+							    <td>Date de sortie</td>
+							    <td>Quantité</td>
+							    <td>Montant</td>
+							</tr>
+                          </thead>
+                         <tbody class="poste">
+                          <t t-foreach="sdtlines" t-as="sdtline">
+                            <tr><td><span t-esc="sdtline['produit']"/></td><td><span t-esc="sdtline['name']"/></td><td><span t-esc="sdtline['datesortie']" t-esc-options='{"widget": "date"}' /></td><td align="right"><span t-esc="'{:,.0f}'.format(sdtline['quantite']).replace(',', ' ').replace('.', ',')"/></td><td align="right"><span t-esc="'{:,.0f}'.format(sdtline['montant']).replace(',', ' ').replace('.', ',')"/></td></tr>
+                          </t>
+                         </tbody>
+						</table>
+
+
+                </div>
+        </t>
+    </t>
+</template>
+</odoo>

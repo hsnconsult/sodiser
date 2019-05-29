@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="minimal_layout_inherit" inherit_id="web.minimal_layout">
+		<xpath expr="//head" position="inside">
+			<link rel='stylesheet' href="/oms/static/src/css/oms.css"/>
+		</xpath>
+</template>
+<template id="report_paye">
+    <t t-call="web.html_container">
+        <t t-set="data_report_margin_top" t-value="12"/>
+        <t t-set="data_report_header_spacing" t-value="9"/>
+        <t t-set="data_report_dpi" t-value="110"/>
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.basic_layout">
+                <div class="page">
+              <div>
+                  <table class="table-condensed">
+                    <tr><td width="20%"><img t-att-src="'/oms/static/src/img/logo.png'" width="80%"/></td>
+                        <td class="titrerecu">SOCIETE DE DISTRIBUTION DE PRODUITS PETROLIERS<br /><div class="soustitrerecu"><span t-esc="o.company_id.rml_header1" /></div></td></tr>
+				  </table>
+                      <div align="right">
+                         <div align="right" class="bpfrecu">
+						     BPF CFA <span t-esc="'{:,.0f}'.format(o.amount).replace(',', ' ').replace('.', ',')" class="montant"/>
+                         </div>
+                      </div>
+                      <div align="center" class="titrecaisse"><strong>RECU N°</strong> <span t-esc="o.name" /><strong> / <span t-esc="o.journal_id.name" /></strong></div>
+						<table class="table table-bordered poste aposte">
+  							<tr><td width="20%"><strong>Reçu de</strong> </td><td><span t-esc="o.partner_id.name" /></td></tr>
+  							<tr><td><strong>Montant</strong></td><td><span t-esc="o.compute_text()"/> Francs CFA</td></tr>
+  							<tr><td><strong>Objet</strong></td><td><span t-esc="o.communication" /> <span t-esc="o.objet" /></td></tr>
+  							<tr><td><strong>Date</strong></td><td><span t-esc="o.payment_date" t-esc-options='{"widget": "date"}' /></td></tr>
+						</table>
+                     <div id="basrecu">
+                      <div class="signature poste" style="width:50%;">
+						LA CAISSE
+                      </div>
+                      <div class="signature poste" style="width:45%; text-align:right">
+                        POUR ACQUIT
+                      </div>
+                     </div>
+                </div>
+                <div id="recbas">
+                  <table>
+                    <tr><td width="20%"><img t-att-src="'/oms/static/src/img/logo.png'" width="80%"/></td>
+                        <td class="titrerecu">SOCIETE DE DISTRIBUTION DE PRODUITS PETROLIERS<br /><div class="soustitrerecu"><span t-esc="o.company_id.rml_header1" /></div></td></tr>
+				  </table>
+                      <div align="right">
+                         <div align="right" class="bpfrecu">
+						     BPF CFA <span t-esc="'{:,.0f}'.format(o.amount).replace(',', ' ').replace('.', ',')" class="montant"/>
+                         </div>
+                      </div>
+                      <div align="center" class="titrecaisse"><strong>RECU N°</strong> <span t-esc="o.name" /><strong> / <span t-esc="o.journal_id.name" /></strong></div>
+						<table class="table table-bordered poste aposte">
+  							<tr><td width="20%"><strong>Reçu de</strong> </td><td><span t-esc="o.partner_id.name" /></td></tr>
+  							<tr><td><strong>Montant</strong></td><td><span t-esc="o.compute_text()"/> Francs CFA</td></tr>
+  							<tr><td><strong>Objet</strong></td><td><span t-esc="o.communication" /> <span t-esc="o.objet" /></td></tr>
+  							<tr><td><strong>Date</strong></td><td><span t-esc="o.payment_date" t-esc-options='{"widget": "date"}' /></td></tr>
+						</table>
+                     <div>
+                      <div class="signature poste" style="width:50%;">
+						LA CAISSE
+                      </div>
+                      <div class="signature poste" style="width:45%; text-align:right">
+                        POUR ACQUIT
+                      </div>
+                     </div>
+                  </div>
+                </div>
+        </t>
+        </t>
+    </t>
+</template>
+</odoo>
