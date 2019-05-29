@@ -188,9 +188,9 @@ class AccountInvoice(models.Model):
     _description = 'Account invoice'
     _inherit = "account.invoice"
 
-    @api.depends('amount_totalo')
+    @api.depends('amount_total')
     def compute_amount_text(self):
-        return convlettres(self.amount_totalo)
+        return convlettres(self.amount_total)
 
     @api.depends('amount_avoir')
     def compute_amount_avoir_text(self):
