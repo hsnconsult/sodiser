@@ -389,43 +389,8 @@
                 </xpath>
             </field>
         </record>-->
-       <record id="view_oms_invoice_form" model="ir.ui.view">
-            <field name="name">Invoice.ext</field>
-            <field name="model">account.invoice</field>
-            <field name="inherit_id" ref="account.invoice_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='comment']" position="before">
-                            <group class="oe_subtotal_footer oe_left" colspan="2" name="invoice_avoir">
-                                <field name="champvide"/>
-                                <field name="champvide"/>
-                                <field name="amount_avoir" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}" />
-                            </group>
-                            <group class="oe_subtotal_footer oe_left" colspan="2" name="sale_totalo">
-                                <field name="amount_untaxedo" widget='monetary' options="{'currency_field': 'currency_id'}"/>
-                                <field name="amount_taxo" widget='monetary' options="{'currency_field': 'currency_id'}"/>
-                                <field name="amount_totalo" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
-                            </group>
-                    <!--<button name="setprice" string="Corriger prix" type="object" class="btn-primary"/>-->
-                    <button name="setdate" string="Corriger date" type="object" class="btn-primary"/>
-                </xpath>
-                <xpath expr="//field[@name='outstanding_credits_debits_widget']" position="replace" />
 
-                <xpath expr="//field[@name='payment_term_id']" position="after">
-                      <field name="numbeman"/>
-                </xpath>
-            </field>
-        </record>
-       <record id="view_oms_invoiceline_tree" model="ir.ui.view">
-            <field name="name">Invoiceline.ext</field>
-            <field name="model">account.invoice.line</field>
-            <field name="inherit_id" ref="account.view_invoice_line_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='discount']" position="after">
-                      <field name="pu_officiel"/>
-                      <field name="price_subtotalo"/>
-                </xpath>
-            </field>
-        </record>
+
        <record id="view_oms_partner_form" model="ir.ui.view">
             <field name="name">Partner.ext</field>
             <field name="model">res.partner</field>
